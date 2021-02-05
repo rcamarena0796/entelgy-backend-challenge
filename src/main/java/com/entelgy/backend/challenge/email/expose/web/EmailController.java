@@ -18,17 +18,15 @@ public class EmailController {
     private EmailService emailService;
 
     @PostMapping("")
-    public Email createEmail(@RequestBody EmailDto emailDto) {
-
-        return emailService.saveEmail(emailDto);
-
+    public ResponseEntity<Email> createEmail(@RequestBody EmailDto emailDto) {
+        return ResponseEntity.ok().body(emailService.saveEmail(emailDto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Email> getEmail(@PathVariable("id") String id){
-        try{
+    public ResponseEntity<Email> getEmail(@PathVariable("id") String id) {
+        try {
             return ResponseEntity.ok().body(emailService.getEmailById(id));
-        }catch(Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -42,7 +40,7 @@ public class EmailController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<Email>> getAllEmailByPostId() {
+    public ResponseEntity<List<Email>> getAll() {
 
         return ResponseEntity.ok().body(emailService.getAll());
 

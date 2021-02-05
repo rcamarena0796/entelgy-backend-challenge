@@ -22,22 +22,21 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public Email saveEmail(EmailDto emailDto) {
         Email email = Email.builder().id(emailDto.getId()).email(emailDto.getEmail()).postId(emailDto.getPostId()).build();
-        emailRepository.save(email);
-        return email;
+        return emailRepository.save(email);
     }
 
     @Override
-    public Email getEmailById(String id) throws Exception{
+    public Email getEmailById(String id) throws Exception {
         return emailRepository.findById(id).orElseThrow(() -> new Exception("Email not found for this id :: " + id));
     }
 
     @Override
-    public List<Email> getEmailsByPostId(String id){
+    public List<Email> getEmailsByPostId(String id) {
         return emailRepository.findAllByPostId(id);
     }
 
     @Override
-    public List<Email> getAll(){
+    public List<Email> getAll() {
         return emailRepository.findAll();
     }
 
